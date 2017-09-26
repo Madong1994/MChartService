@@ -10,7 +10,11 @@ import im.common.protof.RequestModel;
 import im.common.protof.ResponseModel;
 import im.common.util.annotation.IMInterceptor;
 import im.common.util.annotation.IMRequest;
+import im.common.util.tool.IMSend;
+import im.common.util.tool.ProtoBufUtil;
+import im.server.IMServerStarter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.thymeleaf.util.DateUtils;
 import org.tio.core.Aio;
 import org.tio.core.ChannelContext;
 
@@ -40,10 +44,12 @@ public class LoginHandler implements BaseHandler {
         String userJson = imRequest.getData();
         User user = User.toUser(userJson);
         User muser = userService.selectUserByUserNumAndPwd(user.getUserNum(),user.getPwd());
-        if(muser != null){
-            Aio.bindUser(channelContext,user.getUserNum());
+        if(muser == null){
+            //没有注册
+            ResponseModel.ImResponse imResponse = ProtoBufUtil.responseModelFactory(0,1,null,null, System.currentTimeMillis()+"","该账号没有注册");
+//            IMSend.send();
         }
-
+        Aio.bindUser(channelContext,user.getUserNum());
         IMPacket imPacket = ImResponse();
         Aio.send(channelContext,imPacket);
         return null;
