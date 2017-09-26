@@ -1,6 +1,7 @@
 package im.common.interceptor;
 
-import com.base.im.common.IMPacket;
+
+import im.common.IMPacket;
 import org.tio.core.ChannelContext;
 
 import java.lang.reflect.InvocationHandler;

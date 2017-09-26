@@ -1,8 +1,9 @@
 package im.common.handlers.impl;
 
 
+import com.example.demo.entity.User;
+import com.example.demo.service.UserService;
 import com.jfinal.log.Log;
-import entity.User;
 import im.common.IMPacket;
 import im.common.handlers.BaseHandler;
 import im.common.protof.RequestModel;
@@ -12,7 +13,6 @@ import im.common.util.annotation.IMRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.tio.core.Aio;
 import org.tio.core.ChannelContext;
-import service.UserService;
 
 
 /**

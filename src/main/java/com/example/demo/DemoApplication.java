@@ -4,8 +4,11 @@ import com.jfinal.log.Log;
 import im.server.IMServerStarter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ServletComponentScan
 public class DemoApplication {
 	private static Log log = Log.getLog(DemoApplication.class);
 	public static void main(String[] args) {

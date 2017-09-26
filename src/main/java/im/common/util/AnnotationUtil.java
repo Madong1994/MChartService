@@ -1,11 +1,11 @@
 package im.common.util;
 
-import com.base.im.common.handlers.BaseHandleImpl;
-import com.base.im.common.interceptor.BaseInterceptor;
-import com.base.im.common.interceptor.HandlerInterceptor;
-import com.base.im.common.util.annotation.IMInterceptor;
-import com.base.im.common.util.tool.ClassScaner;
 import com.jfinal.log.Log;
+import im.common.handlers.BaseHandleImpl;
+import im.common.interceptor.BaseInterceptor;
+import im.common.interceptor.HandlerInterceptor;
+import im.common.util.annotation.IMInterceptor;
+import im.common.util.tool.ClassScaner;
 
 import java.lang.reflect.Proxy;
 import java.util.List;
