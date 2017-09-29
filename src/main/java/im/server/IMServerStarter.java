@@ -19,7 +19,7 @@ public class IMServerStarter{
     //aioServer对象
     public static AioServer<Object, IMPacket, Object> aioServer = null;
     //有时候需要绑定ip，不需要则null
-    public static String serverIp = null;
+    public static String serverIp = "127.0.0.1";
     //监听的端口
     public static int serverPort = Const.PORT;
 
