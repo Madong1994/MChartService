@@ -1,6 +1,7 @@
 package im.common.handlers.impl;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import com.jfinal.log.Log;
@@ -12,9 +13,9 @@ import im.common.util.annotation.IMInterceptor;
 import im.common.util.annotation.IMRequest;
 import im.common.util.tool.IMSend;
 import im.common.util.tool.ProtoBufUtil;
-import im.server.IMServerStarter;
+import im.common.util.tool.ResultMsg;
+import im.common.util.tool.ResultMsgCode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.thymeleaf.util.DateUtils;
 import org.tio.core.Aio;
 import org.tio.core.ChannelContext;
 
@@ -46,22 +47,20 @@ public class LoginHandler implements BaseHandler {
         User muser = userService.selectUserByUserNumAndPwd(user.getUserNum(),user.getPwd());
         if(muser == null){
             //没有注册
-            ResponseModel.ImResponse imResponse = ProtoBufUtil.responseModelFactory(0,1,null,null, System.currentTimeMillis()+"","该账号没有注册");
-//            IMSend.send();
+            ResultMsg resultMsg = new ResultMsg();
+            resultMsg.setResultCode(ResultMsgCode.LOGIN_FEIL);
+            resultMsg.setResultMsg("登录失败");
+            ResponseModel.ImResponse imResponse = ProtoBufUtil.responseModelFactory(0,1,null,null, System.currentTimeMillis()+"", JSONObject.toJSONString(resultMsg));
+            IMSend.send(channelContext,imResponse);
+            return null;
         }
+        //绑定tio
         Aio.bindUser(channelContext,user.getUserNum());
-        IMPacket imPacket = ImResponse();
-        Aio.send(channelContext,imPacket);
+        ResultMsg resultMsg = new ResultMsg();
+        resultMsg.setResultCode(ResultMsgCode.LOGIN_SCUSSE);
+        resultMsg.setResultMsg("登录成功");
+        ResponseModel.ImResponse imResponse = ProtoBufUtil.responseModelFactory(0,1,null,null, System.currentTimeMillis()+"", JSONObject.toJSONString(resultMsg));
+        IMSend.send(channelContext,imResponse);
         return null;
-    }
-    private IMPacket ImResponse(){
-        ResponseModel.ImResponse.Builder builder = ResponseModel.ImResponse.newBuilder();
-        builder.setCode(0);//0表示成功，1表示失败
-        builder.setHandler(0);//0表示响应，1表示请求
-        builder.setObjectJson("登录成功！");
-        ResponseModel.ImResponse imResponse = builder.build();
-        IMPacket imPacket = new IMPacket();
-        imPacket.setBody(imResponse.toByteArray());
-        return imPacket;
     }
 }
