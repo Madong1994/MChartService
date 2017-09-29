@@ -9,6 +9,7 @@ import im.common.handlers.BaseHandler;
 import im.common.protof.RequestModel;
 import im.common.protof.ResponseModel;
 import im.common.util.RequestCode;
+import im.common.util.ResponseCode;
 import im.common.util.annotation.IMInterceptor;
 import im.common.util.annotation.IMRequest;
 import im.common.util.tool.*;
@@ -49,7 +50,7 @@ public class LoginHandler implements BaseHandler {
             ResultMsg resultMsg = new ResultMsg();
             resultMsg.setResultCode(ResultMsgCode.LOGIN_FAIL);
             resultMsg.setResultMsg("登录失败");
-            ResponseModel.ImResponse imResponse = ProtoBufUtil.responseModelFactory(0,1,null,null, System.currentTimeMillis()+"", JSONObject.toJSONString(resultMsg));
+            ResponseModel.ImResponse imResponse = ProtoBufUtil.responseModelFactory(ResponseCode.RES_LOGIN,1,null,null, System.currentTimeMillis()+"", JSONObject.toJSONString(resultMsg));
             IMSend.send(channelContext,imResponse);
             return null;
         }
@@ -58,7 +59,7 @@ public class LoginHandler implements BaseHandler {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setResultCode(ResultMsgCode.LOGIN_SCUSSE);
         resultMsg.setResultMsg("登录成功");
-        ResponseModel.ImResponse imResponse = ProtoBufUtil.responseModelFactory(0,1,null,null, System.currentTimeMillis()+"", JSONObject.toJSONString(resultMsg));
+        ResponseModel.ImResponse imResponse = ProtoBufUtil.responseModelFactory(ResponseCode.RES_LOGIN,1,null,null, System.currentTimeMillis()+"", JSONObject.toJSONString(resultMsg));
         IMSend.send(channelContext,imResponse);
         return null;
     }
