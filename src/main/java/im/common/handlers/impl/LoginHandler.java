@@ -48,7 +48,7 @@ public class LoginHandler implements BaseHandler {
         if(muser == null){
             //没有注册
             ResultMsg resultMsg = new ResultMsg();
-            resultMsg.setResultCode(ResultMsgCode.LOGIN_FEIL);
+            resultMsg.setResultCode(ResultMsgCode.LOGIN_FAIL);
             resultMsg.setResultMsg("登录失败");
             ResponseModel.ImResponse imResponse = ProtoBufUtil.responseModelFactory(0,1,null,null, System.currentTimeMillis()+"", JSONObject.toJSONString(resultMsg));
             IMSend.send(channelContext,imResponse);

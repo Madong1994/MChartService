@@ -15,9 +15,9 @@ package im.common.util.tool;
  * 注意：本内容仅限于华夏九鼎内部传阅，禁止外泄以及用于其他的商业目的
  */
 public interface ResultMsgCode {
-    public static int REGIST_FEILL = 81;//注册失败
-    public static int LOGIN_FEIL = 82;//登录失败
-    public static int SEND_FEIL = 83;//发送失败
+    public static int REGIST_FAILL = 81;//注册失败
+    public static int LOGIN_FAIL = 82;//登录失败
+    public static int SEND_FAIL = 83;//发送失败
 
     public static int REGIST_SCUSSE = 100;//注册成功
     public static int LOGIN_SCUSSE = 101;//注册成功
